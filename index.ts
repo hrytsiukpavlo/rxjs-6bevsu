@@ -50,12 +50,20 @@ const someDivInDocument = document.querySelector('.someDiv') as HTMLDivElement;
 
 // customFromEvent(addEvent, removeEvent).subscribe(() => console.log('Click'));
 
+// const customFromEvent = (element, ev) => {
+//   return element.addEventListener(ev, () => {
+//     console.log('click');
+//   });
+// };
+
+// const test = customFromEvent(someDivInDocument, 'click');
+
 // #3
 // Використовуючи оператор interval, підписатися на нього і слухати до того моменту, доки значення не буде більше 5(використовуючи оператор в pipe)
 
-interval(1000)
-  .pipe(takeWhile((x) => x < 6))
-  .subscribe((x) => console.log(x));
+// interval(1000)
+//   .pipe(takeWhile((x) => x < 6))
+//   .subscribe((x) => console.log(x));
 
 // #4
 // Перетворіть coldInterval нижче на hotInterval, щоб він став гарячим(віддавав одні і ті ж значення різним підписникам)
