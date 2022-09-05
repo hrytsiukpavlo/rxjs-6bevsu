@@ -9,6 +9,10 @@ import {
   takeWhile,
   refCount,
   publish,
+  mergeMap,
+  filter,
+  toArray,
+  from,
 } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
@@ -92,24 +96,33 @@ const someDivInDocument = document.querySelector('.someDiv') as HTMLDivElement;
 //   3000
 // );
 
-const refCountInterval = interval(1000).pipe(
-  takeWhile((x) => x < 6),
-  publish(),
-  refCount()
-);
+// const refCountInterval = interval(1000).pipe(
+//   takeWhile((x) => x < 6),
+//   publish(),
+//   refCount()
+// );
 
-refCountInterval.subscribe((value) => console.log('sub1: ', value));
-setTimeout(() => {
-  refCountInterval.subscribe((value) => console.log('sub2: ', value));
-}, 3000);
+// refCountInterval.subscribe((value) => console.log('sub1: ', value));
+// setTimeout(() => {
+//   refCountInterval.subscribe((value) => console.log('sub2: ', value));
+// }, 3000);
 
 // #5
-
 // Обробити відповідь запиту, в pipe спочатку витягнути об'єкт response(це масив), відфільтруєте масив так, щоб залишилися тільки пости з id менше 5.
 // Hint: так як response - це буде масив постів, ви не можете просто фідфільтрувати його через filter(він приймає кожен елемент масиву, а не цілий масив). Для рішення цієї задачі вам потрібні оператори mergeMap або concatMap, в яких ви зробите з(перекладіть англійською) масиву потік окремих елементів масиву([1, 2, 3] => 1, 2, 3), відфільтруєте їх,а потім зберете назад в масив за допомогою оператора. В subscribe ми отримаємо масив з 4 об'єктів id яких менше 5
 
 // .ajax('https://jsonplaceholder.typicode.com/posts');
 
+// const obs = ajax.getJSON('https://jsonplaceholder.typicode.com/posts');
+
+// obs.pipe(
+//   mergeMap(val => from(val).pipe(
+//     filter(value => value.id < 5),
+//     toArray()
+//   ))
+// ).subscribe(console.log)
+
+// #6
 // Використовуючи Rxjs написати потік, який буде слухати кліки по кнопці і відправляти при натисканню на неї запит на сервер із текстом введеним в пошук. В subscribe ми маємо отримати дані з серверу.
 // Оператори, які можуть знадобитися: fromEvent, switchMap, ajax, map, etc
 
